@@ -23,7 +23,9 @@ fun processCSVDataFile(csvFile: File): Map<CSVGroupKey, List<CSVEntry>> {
     val csvData = csvReader().readAll(csvStringWithoutPreamble).let {
         it.subList(1, it.size) // Skip the first line as it is the header line}
     }
-    val sortedcsvData = csvData.sortedBy {it[1]}
+    val sortedcsvData = csvData.sortedBy {it[2]}
+    // field 1 is time
+    // field 2 is weldnumber
     return sortedcsvData.groupBy {
         Pair(it[Project_Name.ordinal], it[Procedure_Name.ordinal])
     }
